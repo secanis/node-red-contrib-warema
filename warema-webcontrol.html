@@ -1,0 +1,56 @@
+<script type="text/javascript">
+    RED.nodes.registerType('warema-webcontrol', {
+        category: 'network',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: 'warema-webcontrol' },
+            url: { value: null },
+            position: { value: 0 },
+            command: { value: 'move' },
+            room: { value: 0 },
+            rollo: { value: 0 },
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'font-awesome/fa-sun-o',
+        label: function () {
+            return this.name;
+        },
+    });
+</script>
+
+<script type="text/html" data-template-name="warema-webcontrol">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-url"><i class="fa fa-globe"></i> URL</label>
+        <input type="text" id="node-input-url" placeholder="URL" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-position"><i class="fa fa-globe"></i> Position</label>
+        <input type="text" id="node-input-position" placeholder="0" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-command"><i class="fa fa-globe"></i> Command</label>
+        <input type="text" id="node-input-command" placeholder="Command" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-room"><i class="fa fa-globe"></i> Room</label>
+        <input type="text" id="node-input-room" placeholder="0" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-rollo"><i class="fa fa-globe"></i> Rollo</label>
+        <input type="text" id="node-input-rollo" placeholder="0" />
+    </div>
+</script>
+
+<script type="text/html" data-help-name="warema-webcontrol">
+    <p>Node RED extension for Warema sun shading products with Warema web control.</p>
+    <p>
+        <b>Important:</b> Please check that you heave enough high interval times between input triggers.<br />
+        The response times are depending on your signal strength and Warema WebControl response times!<br />
+        I recommend to have more than 10 seconds between each request.
+    </p>
+</script>

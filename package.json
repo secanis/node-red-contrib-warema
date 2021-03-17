@@ -1,0 +1,42 @@
+{
+    "name": "node-red-contrib-warema-webcontrol",
+    "version": "0.1.0",
+    "description": "Node RED extension for Warema sun shading products with Warema web control.",
+    "main": "warema-webcontrol.js",
+    "scripts": {
+        "test": "mocha \"test/**/*.spec.js\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/secanis/node-red-contrib-warema-webcontrol.git"
+    },
+    "keywords": [
+        "warema",
+        "warema web control",
+        "webcontrol",
+        "roller",
+        "sun blinds",
+        "node-red",
+        "node",
+        "red",
+        "smart",
+        "home",
+        "smart-home"
+    ],
+    "author": "matthias.baldi@secanis.ch",
+    "license": "MIT",
+    "node-red": {
+        "nodes": {
+            "warema-webcontrol": "warema-webcontrol.js"
+        }
+    },
+    "dependencies": {
+        "node-fetch": "^2.6.1",
+        "xml2js": "^0.4.23"
+    },
+    "devDependencies": {
+        "mocha": "^8.3.2",
+        "node-red": "^1.2.9",
+        "node-red-node-test-helper": "^0.2.7"
+    }
+}
