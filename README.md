@@ -7,7 +7,7 @@
 With this node-red extension you should be able to control a Warema sun shade rollo with a [Warema WebControl](https://www.warema.com/en/control-systems/radio-systems/wms-webcontrol.php) device.
 The included node allows you to send three different commands to the inofficial API and it parse the XML result as JSON.
 
-![Keba Parser](./images/screenshot.jpg)
+![Warema Flow Screenshot](https://github.com/secanis/node-red-contrib-warema/raw/main/images/screenshot.jpg)
 
 ## Usage
 
