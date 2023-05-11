@@ -1,6 +1,6 @@
 # node-red-contrib-warema-webcontrol
 
-[![NPM](https://nodei.co/npm/red-contrib-warema-webcontrol.png?compact=true)](https://npmjs.org/package/red-contrib-warema-webcontrol)
+[![NPM](https://nodei.co/npm/node-red-contrib-warema-webcontrol.png?compact=true)](https://npmjs.org/package/node-red-contrib-warema-webcontrol)
 
 > This is not an official implementation!
 
