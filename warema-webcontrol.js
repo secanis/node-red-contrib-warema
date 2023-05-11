@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch = import('node-fetch');
 const { parseStringPromise, processors } = require('xml2js');
 
 const MOVE_STATUS_TIMEOUT = 3500;
@@ -28,27 +28,31 @@ module.exports = (RED) => {
 async function webControlRequest(node, config, msg) {
     const cmdText = msg.command || config.command;
 
-    let payload = await sendWebControlCommand(cmdText, config, msg);
+    try {
+        let payload = await sendWebControlCommand(cmdText, config, msg);
 
+        if (cmdText === 'move') {
+            await wait(MOVE_STATUS_TIMEOUT);
+    
+            let movementResponse;
+            // get state during movement to send date to the output and
+            // update the node state
+            const int = setInterval(async () => {
+                movementResponse = await sendWebControlCommand('status', config, msg);
+                sendResults(node, movementResponse);
+                if (movementResponse && movementResponse.fahrt === 0) clearInterval(int);
+            }, MOVE_STATUS_TIMEOUT);
+    
+            payload = movementResponse;
+        }
+    
+        if (payload) {
+            sendResults(node, payload);
+        }
+    } catch(e) {
+        node.warn(e);
+    }
     // if it was a move cmd get now current status to detect movement
-    if (cmdText === 'move') {
-        await wait(MOVE_STATUS_TIMEOUT);
-
-        let movementResponse;
-        // get state during movement to send date to the output and
-        // update the node state
-        const int = setInterval(async () => {
-            movementResponse = await sendWebControlCommand('status', config, msg);
-            sendResults(node, movementResponse);
-            if (movementResponse && movementResponse.fahrt === 0) clearInterval(int);
-        }, MOVE_STATUS_TIMEOUT);
-
-        payload = movementResponse;
-    }
-
-    if (payload) {
-        sendResults(node, payload);
-    }
 }
 
 async function sendWebControlCommand(cmdText, config, msg) {
