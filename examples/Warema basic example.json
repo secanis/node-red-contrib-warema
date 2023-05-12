@@ -1,0 +1,113 @@
+[
+    {
+        "id": "b5347eb2.171f8",
+        "type": "inject",
+        "z": "1bd12e14.704f02",
+        "name": "trigger",
+        "props": [
+            {
+                "p": "command",
+                "v": "status",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 120,
+        "y": 980,
+        "wires": [
+            [
+                "ad19b327.bfbfd"
+            ]
+        ]
+    },
+    {
+        "id": "3b08bbfa.b5cf44",
+        "type": "inject",
+        "z": "1bd12e14.704f02",
+        "name": "",
+        "props": [
+            {
+                "p": "position",
+                "v": "40",
+                "vt": "str"
+            },
+            {
+                "p": "command",
+                "v": "move",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 940,
+        "wires": [
+            [
+                "ad19b327.bfbfd"
+            ]
+        ]
+    },
+    {
+        "id": "ad19b327.bfbfd",
+        "type": "warema-webcontrol",
+        "z": "1bd12e14.704f02",
+        "name": "warema-webcontrol",
+        "url": "http://192.168.1.19",
+        "position": 0,
+        "command": "status",
+        "room": 0,
+        "rollo": 0,
+        "x": 410,
+        "y": 980,
+        "wires": [
+            [
+                "a2621636.7fce28",
+                "ed3cea43.a0b128"
+            ]
+        ]
+    },
+    {
+        "id": "a2621636.7fce28",
+        "type": "mqtt out",
+        "z": "1bd12e14.704f02",
+        "name": "warema/sonnenstore",
+        "topic": "warema/sonnenstore",
+        "qos": "2",
+        "retain": "",
+        "broker": "4d3591e6.a8658",
+        "x": 680,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "4d3591e6.a8658",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "192.168.0.100",
+        "port": "1883",
+        "clientid": "mqtt-nodered",
+        "usetls": false,
+        "compatmode": false,
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "2",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "2",
+        "closeRetain": "false",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "2",
+        "willRetain": "false",
+        "willPayload": ""
+    }
+]
