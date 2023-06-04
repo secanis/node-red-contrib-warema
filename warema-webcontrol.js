@@ -1,4 +1,4 @@
-const fetch = import('node-fetch');
+const fetch = require('cross-fetch');
 const { parseStringPromise, processors } = require('xml2js');
 
 const MOVE_STATUS_TIMEOUT = 3500;
@@ -33,7 +33,7 @@ async function webControlRequest(node, config, msg) {
 
         if (cmdText === 'move') {
             await wait(MOVE_STATUS_TIMEOUT);
-    
+
             let movementResponse;
             // get state during movement to send date to the output and
             // update the node state
@@ -42,14 +42,14 @@ async function webControlRequest(node, config, msg) {
                 sendResults(node, movementResponse);
                 if (movementResponse && movementResponse.fahrt === 0) clearInterval(int);
             }, MOVE_STATUS_TIMEOUT);
-    
+
             payload = movementResponse;
         }
-    
+
         if (payload) {
             sendResults(node, payload);
         }
-    } catch(e) {
+    } catch (e) {
         node.warn(e);
     }
     // if it was a move cmd get now current status to detect movement
