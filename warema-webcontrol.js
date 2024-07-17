@@ -60,7 +60,11 @@ async function sendWebControlCommand(cmdText, config, msg) {
 
     // preflight request for some requests required
     if (cmdText !== 'ready') {
-        fetch(generateUrl(config, getCommandCode('ready')));
+        const res = await fetch(generateUrl(config, getCommandCode('ready')));
+        if (res.status > 399) {
+            console.error('preflight request failed');
+            return;
+        }
         await wait(PREFLIGHT_REQ_TIMEOUT);
     }
 
@@ -68,6 +72,10 @@ async function sendWebControlCommand(cmdText, config, msg) {
     config.position = cmdText === 'move' ? (pos = calculatePosition(msg.position || config.position || 0)) : '';
 
     const res = await fetch(generateUrl(config, getCommandCode(cmdText)));
+    if (res.status > 399) {
+        console.error('command request failed');
+        return;
+    }
     const parsedBody = await res.text();
     const parsedResponse = await parseStringPromise(parsedBody, xmlParserOpts);
     return parsedResponse.response;
